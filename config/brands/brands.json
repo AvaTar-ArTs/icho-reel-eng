@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "profiles": {
+    "ichotaku_default": {
+      "description": "High-contrast creator-tech identity for commentary and builder content.",
+      "palette": ["#0B0B10", "#F2F0E8", "#F02E7D", "#35CFE0"],
+      "headline_style": "condensed_bold_distressed",
+      "caption_style": "clean_high_contrast",
+      "motifs": ["signal", "scanline", "terminal", "hand_markup"],
+      "motion": "clean_punchy"
+    },
+    "digitaldive": {
+      "description": "Knowledge-system and research identity.",
+      "palette": ["#090B10", "#EAF4F4", "#3DD6D0", "#A2F5FF"],
+      "headline_style": "technical_condensed",
+      "caption_style": "interface_card",
+      "motifs": ["diagram", "grid", "waveform", "knowledge_graph"],
+      "motion": "precise_modular"
+    },
+    "heartbreak_alley": {
+      "description": "Trashcat anthology, punk zine, neon alley and emotional worldbuilding identity.",
+      "palette": ["#09090B", "#F4EFE4", "#F22982", "#39D8D0", "#D88940"],
+      "headline_style": "brush_punk",
+      "caption_style": "zine_panel",
+      "motifs": ["raccoon", "crown", "radio_tower", "moon", "heart", "scrap", "graffiti"],
+      "motion": "collage_cutout"
+    },
+    "eso_gaming": {
+      "description": "Gameplay-first profile for ESO guides, discoveries and creator history.",
+      "palette": ["#0C0D0E", "#F4EFE3", "#B79A65", "#6FB0C4"],
+      "headline_style": "game_ui_bold",
+      "caption_style": "minimal_safezone",
+      "motifs": ["quest_card", "map_marker", "loot_tag", "timeline"],
+      "motion": "gameplay_respectful"
+    }
+  }
+}
