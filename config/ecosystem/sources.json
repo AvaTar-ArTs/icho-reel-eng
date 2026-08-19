@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "generated_at": "2026-08-19T16:00:00Z",
+  "sources": [
+    {
+      "repo": "AvaTar-ArTs/content-universe",
+      "commit": "7996bbe8414b80818bc7a77020291715b41fb236",
+      "mode": "runtime-adapter",
+      "authority": ["asset-system", "provenance", "lineage", "creative-graph"],
+      "capabilities": [
+        "asset-provenance",
+        "asset-lineage",
+        "creative-graph",
+        "prompt-lineage",
+        "cross-media-catalog",
+        "workflow-provenance"
+      ],
+      "notes": "Durable source of truth for recovered and generated creative artifacts. Query or adapt; do not duplicate its graph model inside icho-reel-eng."
+    },
+    {
+      "repo": "AvaTar-ArTs/agent-skills",
+      "commit": "af71bdf644030f447c2bcd69575ea19e92b964c7",
+      "mode": "reference",
+      "authority": ["broad-skill-source", "specialist-workflows"],
+      "capabilities": [
+        "structured-asset-pipeline",
+        "workspace-audit",
+        "verification",
+        "research",
+        "media-workflows",
+        "skill-authoring"
+      ],
+      "notes": "Broad authored ecosystem. Consume through curated projections when possible; avoid runtime import of unrestricted material."
+    },
+    {
+      "repo": "AvaTar-ArTs/superAgents",
+      "commit": "9d56534c686242cc82aa4033bc574c14fc6856fe",
+      "mode": "contract",
+      "authority": ["agent-routing", "approval-policy", "execution-envelope"],
+      "capabilities": [
+        "capability-routing",
+        "agent-selection",
+        "approval-policy",
+        "execution-audit",
+        "verification-gates"
+      ],
+      "notes": "Use for deterministic agent selection and approval semantics. Selection never implies authorization."
+    },
+    {
+      "repo": "AvaTar-ArTs/superSkills",
+      "commit": "2cb68b62354efb3acc36140de5282f7b8bb119d3",
+      "mode": "contract",
+      "authority": ["curated-skill-catalog"],
+      "capabilities": [
+        "skill-catalog",
+        "asset-pipeline",
+        "source-backed-research",
+        "mcp-development",
+        "catalog-synchronization",
+        "changelog-discipline"
+      ],
+      "notes": "Authoritative curated skill layer. Prefer stable skill IDs over copying skill text into this repository."
+    },
+    {
+      "repo": "AvaTar-ArTs/creator-camp",
+      "commit": "32b049eb6f7780c14a5480b61bca8cb70591e2b2",
+      "mode": "contract",
+      "authority": ["creator-workflow", "canon-to-release", "rights-aware-packaging"],
+      "capabilities": [
+        "canon-workflow",
+        "story-development",
+        "artifact-planning",
+        "release-packaging",
+        "rights-records",
+        "adaptation-planning"
+      ],
+      "notes": "Coordinates storyworld and release workflow while specialized repositories keep implementation ownership."
+    },
+    {
+      "repo": "AvaTar-ArTs/my-creators",
+      "commit": "07c4e8b0394af620e754bf48992ed1ff96c7ad36",
+      "mode": "runtime-adapter",
+      "authority": ["local-visual-generation", "storyboard-contracts", "adapter-training"],
+      "capabilities": [
+        "storyboard-generation",
+        "shot-manifest",
+        "comfyui",
+        "style-adapters",
+        "character-adapters",
+        "local-image-generation",
+        "visual-consistency"
+      ],
+      "notes": "Owns local image/storyboard generation and adapter training. icho-reel-eng should compile scenes into its shot-manifest boundary."
+    }
+  ]
+}
