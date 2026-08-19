@@ -1,0 +1,57 @@
+{
+  "content_id": "icho-alley-0001",
+  "series": "heartbreak_alley",
+  "title": "Love Is Rubbish: Recycled Hearts",
+  "topic": "trashcat anthology micro-story",
+  "content_type": "anthology_lore",
+  "description": "A dense visual-lore short using the Heartbreak Alley / Trashcat anthology identity.",
+  "script": {
+    "hook": "We do not chase love. We recycle it.",
+    "body": [
+      "The alley keeps everything: technical debt, broken promises, late nights, and the pieces nobody thought were worth saving.",
+      "Then the trashcats do what they always do. Collect it. Burn it. Re-form it.",
+      "Rubbish today. Royalty tomorrow."
+    ],
+    "cta": "Long live Trashcat royalty."
+  },
+  "format": {
+    "platform_targets": ["instagram", "youtube_shorts"],
+    "aspect_ratio": "9:16",
+    "target_duration_sec": 48,
+    "structure_mode": "manga_anthology"
+  },
+  "presentation": {
+    "avatar_mode": "mascot",
+    "voice_mode": "tts",
+    "subtitle_mode": "burned_in",
+    "visual_density": "dense",
+    "transition_style": "collage_cutout"
+  },
+  "branding": {
+    "brand_profile": "heartbreak_alley",
+    "theme_profile": "love_is_rubbish",
+    "intro_template": "trashcat_signal_v1",
+    "outro_template": "trashcat_manifesto_v1"
+  },
+  "assets": {
+    "preferred_sources": ["local_archive", "uploaded", "generated"],
+    "asset_tags": ["trashcat", "raccoon", "punk", "zine", "moon", "radio", "alley", "heart"],
+    "required_assets": [],
+    "optional_assets": ["trashcat-poster", "moon-background", "radio-tower", "crown", "glowing-heart"]
+  },
+  "audio": {
+    "voice_provider": "default",
+    "voice_id": "icho_lore",
+    "music_mode": "featured",
+    "ducking": true
+  },
+  "publishing": {
+    "mode": "approval",
+    "schedule_at": null
+  },
+  "metadata": {
+    "hashtags_seed": ["#ichoTaKu", "#LoveIsRubbish", "#TrashcatRoyalty", "#HeartbreakAlley"],
+    "cta": "Long live Trashcat royalty.",
+    "language": "en"
+  }
+}
