@@ -3,12 +3,11 @@ from __future__ import annotations
 import json
 import math
 import subprocess
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
-
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SCHEMA = ROOT / "schemas" / "content.schema.json"
@@ -45,14 +44,20 @@ def load_json(path: str | Path) -> dict[str, Any]:
         return json.load(handle)
 
 
-def validate_content(data: dict[str, Any], schema_path: str | Path = DEFAULT_SCHEMA) -> list[str]:
+def validate_content(
+    data: dict[str, Any], schema_path: str | Path = DEFAULT_SCHEMA
+) -> list[str]:
     schema = load_json(schema_path)
     validator = Draft202012Validator(schema, format_checker=FormatChecker())
     errors = sorted(validator.iter_errors(data), key=lambda e: list(e.absolute_path))
-    return [f"{'/'.join(map(str, err.absolute_path)) or '<root>'}: {err.message}" for err in errors]
+    return [
+        f"{'/'.join(map(str, err.absolute_path)) or '<root>'}: {err.message}" for err in errors
+    ]
 
 
-def assert_valid_content(data: dict[str, Any], schema_path: str | Path = DEFAULT_SCHEMA) -> None:
+def assert_valid_content(
+    data: dict[str, Any], schema_path: str | Path = DEFAULT_SCHEMA
+) -> None:
     errors = validate_content(data, schema_path)
     if errors:
         raise ValueError("Invalid content package:\n- " + "\n- ".join(errors))
