@@ -1,0 +1,57 @@
+{
+  "content_id": "icho-builder-0001",
+  "series": "digitaldive",
+  "title": "Why I Build Systems Instead of One-Off Content",
+  "topic": "creative automation",
+  "content_type": "builder_commentary",
+  "description": "An ichoTaKu builder-mode short about converting ideas into reusable systems.",
+  "script": {
+    "hook": "Most creators do not need more tools. They need better systems.",
+    "body": [
+      "A good workflow removes friction between an idea and the thing you actually publish.",
+      "I build the layers once: content contracts, asset reuse, automation, rendering, review, and publishing.",
+      "Then every new idea can move through the same engine without becoming the same piece of content."
+    ],
+    "cta": "This is the kind of creator infrastructure I am building around ichoTaKu."
+  },
+  "format": {
+    "platform_targets": ["instagram", "youtube_shorts"],
+    "aspect_ratio": "9:16",
+    "target_duration_sec": 42,
+    "structure_mode": "workflow_demo"
+  },
+  "presentation": {
+    "avatar_mode": "optional",
+    "voice_mode": "tts",
+    "subtitle_mode": "burned_in",
+    "visual_density": "medium",
+    "transition_style": "clean_punchy"
+  },
+  "branding": {
+    "brand_profile": "ichotaku_default",
+    "theme_profile": "creator_systems",
+    "intro_template": "icho_signal_intro_v1",
+    "outro_template": "icho_cta_v1"
+  },
+  "assets": {
+    "preferred_sources": ["local_archive", "uploaded", "generated"],
+    "asset_tags": ["automation", "n8n", "python", "workflow", "creator_system"],
+    "required_assets": [],
+    "optional_assets": ["screen-recording", "workflow-graph", "terminal-capture"]
+  },
+  "audio": {
+    "voice_provider": "default",
+    "voice_id": "icho_default",
+    "music_mode": "light_background",
+    "ducking": true
+  },
+  "publishing": {
+    "mode": "approval",
+    "schedule_at": null
+  },
+  "metadata": {
+    "hashtags_seed": ["#ichoTaKu", "#CreativeAutomation", "#AIWorkflow"],
+    "cta": "Follow for more creator systems.",
+    "language": "en"
+  }
+}
