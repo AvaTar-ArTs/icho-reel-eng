@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avatar-arts.dev/schemas/icho-reel/approval-package.schema.json",
+  "title": "ichoTaKu Reel Approval Package",
+  "type": "object",
+  "required": [
+    "content_id",
+    "preview_path",
+    "final_path",
+    "caption",
+    "hashtags",
+    "technical_qc",
+    "provenance",
+    "status"
+  ],
+  "properties": {
+    "content_id": {"type": "string", "minLength": 1},
+    "preview_path": {"type": "string", "minLength": 1},
+    "final_path": {"type": "string", "minLength": 1},
+    "caption": {"type": "string"},
+    "hashtags": {"type": "array", "items": {"type": "string"}},
+    "title_variants": {"type": "array", "items": {"type": "string"}},
+    "estimated_cost_usd": {"type": "number", "minimum": 0},
+    "asset_sources": {"type": "array", "items": {"type": "string"}},
+    "technical_qc": {
+      "type": "object",
+      "required": ["passed", "issues"],
+      "properties": {
+        "passed": {"type": "boolean"},
+        "issues": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "provenance": {"type": "object"},
+    "status": {
+      "enum": ["ready_for_review", "approved", "rejected", "revision_requested"]
+    }
+  },
+  "additionalProperties": false
+}
