@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avatararts.org/schemas/icho-reel/content.schema.json",
+  "title": "ichoTaKu Reel Content",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["content_id", "title", "content_type", "script", "format", "branding", "publishing"],
+  "properties": {
+    "content_id": {"type": "string", "minLength": 3, "pattern": "^[A-Za-z0-9._-]+$"},
+    "series": {"type": ["string", "null"]},
+    "title": {"type": "string", "minLength": 1},
+    "topic": {"type": "string", "default": ""},
+    "content_type": {
+      "enum": ["builder_commentary", "gameplay_insight", "anthology_lore", "voiceover_broll", "music_visual"]
+    },
+    "description": {"type": "string", "default": ""},
+    "script": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["hook", "body"],
+          "properties": {
+            "hook": {"type": "string", "minLength": 1},
+            "body": {
+              "oneOf": [
+                {"type": "string", "minLength": 1},
+                {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+              ]
+            },
+            "cta": {"type": "string", "default": ""}
+          }
+        }
+      ]
+    },
+    "format": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform_targets", "aspect_ratio", "target_duration_sec", "structure_mode"],
+      "properties": {
+        "platform_targets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["instagram", "youtube_shorts", "tiktok", "facebook_reels", "archive_only"]}
+        },
+        "aspect_ratio": {"const": "9:16"},
+        "target_duration_sec": {"type": "integer", "minimum": 10, "maximum": 180},
+        "structure_mode": {
+          "enum": ["hook_commentary", "voiceover_broll", "manga_anthology", "workflow_demo", "gameplay_insight", "music_visual"]
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "avatar_mode": {"enum": ["none", "optional", "ai_avatar", "mascot", "creator_media"]},
+        "voice_mode": {"enum": ["none", "human", "tts"]},
+        "subtitle_mode": {"enum": ["none", "burned_in", "sidecar"]},
+        "visual_density": {"enum": ["minimal", "medium", "dense"]},
+        "transition_style": {"type": "string"}
+      }
+    },
+    "branding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["brand_profile"],
+      "properties": {
+        "brand_profile": {"enum": ["ichotaku_default", "digitaldive", "heartbreak_alley", "eso_gaming"]},
+        "theme_profile": {"type": ["string", "null"]},
+        "intro_template": {"type": ["string", "null"]},
+        "outro_template": {"type": ["string", "null"]}
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preferred_sources": {
+          "type": "array",
+          "items": {"enum": ["local_archive", "gameplay", "generated", "stock", "uploaded"]}
+        },
+        "asset_tags": {"type": "array", "items": {"type": "string"}},
+        "required_assets": {"type": "array", "items": {"type": "string"}},
+        "optional_assets": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "voice_provider": {"type": ["string", "null"]},
+        "voice_id": {"type": ["string", "null"]},
+        "music_mode": {"enum": ["none", "light_background", "featured"]},
+        "ducking": {"type": "boolean"}
+      }
+    },
+    "publishing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {"enum": ["approval", "draft_only", "scheduled", "automatic", "archive_only"]},
+        "schedule_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "hashtags_seed": {"type": "array", "items": {"type": "string"}},
+        "cta": {"type": "string"},
+        "language": {"type": "string", "default": "en"}
+      }
+    }
+  }
+}
