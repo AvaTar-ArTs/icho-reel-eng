@@ -1,0 +1,63 @@
+{
+  "name": "ichoTaKu Reel Engine - Compile Review Publish",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "icho-reel/compile", "responseMode": "lastNode"},
+      "id": "webhook",
+      "name": "Compile Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json; if (!body.content_id) throw new Error('content_id required'); return [{json:{...body, run_id: body.run_id ?? `run:${body.content_id}:${Date.now()}`, stage:'compile'}}];"
+      },
+      "id": "normalize",
+      "name": "Normalize Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "command": "=icho-reel plan {{$json.input_path}} --output runs/{{$json.content_id}}/plan.json && icho-reel manifest {{$json.input_path}} --output runs/{{$json.content_id}}/render-manifest.json"
+      },
+      "id": "compile",
+      "name": "Compile Plan",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{...$('Normalize Request').item.json, status:'ready_for_review', approval_required:true, next_action:'render_and_qc'}}];"
+      },
+      "id": "approval",
+      "name": "Create Approval Gate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 0]
+    },
+    {
+      "parameters": {"respondWith": "json", "responseBody": "={{$json}}"},
+      "id": "respond",
+      "name": "Return Review Package",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [960, 0]
+    }
+  ],
+  "connections": {
+    "Compile Webhook": {"main": [[{"node": "Normalize Request", "type": "main", "index": 0}]]},
+    "Normalize Request": {"main": [[{"node": "Compile Plan", "type": "main", "index": 0}]]},
+    "Compile Plan": {"main": [[{"node": "Create Approval Gate", "type": "main", "index": 0}]]},
+    "Create Approval Gate": {"main": [[{"node": "Return Review Package", "type": "main", "index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"},
+  "active": false,
+  "meta": {
+    "purpose": "Non-autonomous review-first orchestration. Publishing remains disabled until explicit approval and platform adapters are configured.",
+    "ecosystem": ["content-universe", "my-creators", "superAgents", "creator-camp"]
+  }
+}
