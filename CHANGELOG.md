@@ -2,6 +2,56 @@
 
 All notable changes to `icho-reel-eng` are recorded here.
 
+## [0.3.0] - 2026-08-19
+
+### Added
+
+- Archive-first asset resolution with Content Universe normalized-record lookup, local filesystem fallback, deterministic scoring, and composite resolution.
+- Evolved media compiler that resolves scenes, emits my-creators generation requests for missing visuals, preserves subtitle provenance, and creates a SuperAgents routing envelope.
+- Subtitle cue contracts carrying scene and content provenance.
+- ffprobe-backed technical QC for duration, vertical dimensions, video/audio stream presence, and fail-closed missing-output behavior.
+- Approval package contract and JSON Schema for review-first publishing.
+- Creator Camp adaptation linkage contract covering IP, story, scene, canon version, rights state, and release state.
+- Multi-platform publish request/result contracts for Instagram, YouTube Shorts, and TikTok plus a non-destructive dry-run publisher.
+- n8n compile/review workflow starter with an explicit approval gate.
+- Regression tests for asset preference, generation fallback, subtitle timing, SuperAgents routing, Creator Camp lineage, publish safety, and technical QC.
+
+### Changed
+
+- The Reel Engine now compiles deterministic production packages rather than treating provider execution as part of planning.
+- Missing archive assets become explicit storyboard-generation requests instead of silent generative API calls.
+- Publishing remains approval-first and platform adapters are separated from orchestration.
+- Scene compilation now exposes provenance boundaries needed to register final outputs back into Content Universe.
+
+## [0.2.0] - 2026-08-19
+
+### Added
+
+- Cross-repository ecosystem audit covering Content Universe, agent-skills, SuperAgents, SuperSkills, Creator Camp, and my-creators.
+- Pinned ecosystem source catalog with explicit authority, mode, and capability declarations.
+- Reel-stage capability mapping for ingestion, planning, asset resolution, generation, rendering, approval, publishing, archiving, and story release.
+- Deterministic ecosystem capability selector and integration-plan builder.
+- my-creators storyboard bridge that compiles reel scenes into shot-manifest shaped records.
+- Content Universe artifact bridge for typed asset identity, SHA-256 provenance, and parent lineage.
+- Regression tests enforcing repository boundaries, source pinning, visual-generation routing, and provenance handoff behavior.
+
+### Changed
+
+- Reframed `icho-reel-eng` as the short-form production compiler within the wider AvaTar-ArTs creator ecosystem rather than a self-contained media monolith.
+- Asset identity and long-term provenance are now delegated conceptually to Content Universe.
+- Local generated-visual planning now targets the my-creators storyboard contract boundary.
+- Agent routing and approval semantics are reserved for SuperAgents integration.
+- Curated reusable capability IDs are sourced from SuperSkills while agent-skills remains the broader authored source ecosystem.
+- Narrative and anthology content can evolve toward Creator Camp canon, rights, release, and adaptation lineage.
+
+### Architecture decisions
+
+- Specialized repositories retain implementation ownership.
+- Cross-repository integration uses narrow interchange records instead of copied internal schemas.
+- External source commits are pinned for reproducible audits and adapter work.
+- Agent selection never implies authorization for external writes.
+- Broad agent-skills content is not treated as an unrestricted runtime dependency.
+
 ## [0.1.0] - 2026-08-19
 
 ### Added

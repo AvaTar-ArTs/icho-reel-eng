@@ -1,95 +1,158 @@
 # icho-reel-eng
 
-Personal short-form media automation engine for **ichoTaKu**.
+A personal short-form media compiler for **ichoTaKu**.
 
-`icho-reel-eng` turns structured creator content into a deterministic production plan that can be orchestrated by n8n, rendered locally with FFmpeg, enriched by optional AI providers, reviewed, archived, and eventually published to Instagram Reels, YouTube Shorts, TikTok, and other destinations.
+`icho-reel-eng` turns structured creator inputs into deterministic production packages for Reels, Shorts, and TikTok while delegating durable asset identity, visual generation, agent routing, and canon/release concerns to the wider AvaTar-ArTs ecosystem.
 
-This repository is intentionally **creator-first** rather than content-farm-first. It prefers existing personal assets, gameplay, reusable brand media, and local rendering before spending money on generative APIs.
+## What it owns
 
-## Design principles
+- short-form content planning
+- scene compilation
+- archive-first asset resolution
+- subtitle/cue contracts
+- render manifests
+- local FFmpeg-oriented composition boundaries
+- ffprobe technical QC
+- approval packaging
+- publishing orchestration contracts
+- final Content Universe provenance handoff
 
-- Adaptive formats instead of a fixed avatar/B-roll ratio.
-- Local-first media processing with cloud providers as replaceable adapters.
-- JSON Schema contracts before expensive generation.
-- Approval-first publishing by default.
-- Every run is reproducible, inspectable, and archiveable.
-- Brand profiles separate visual identity from workflow logic.
-- n8n orchestrates; Python plans, validates, and prepares deterministic media work.
+## What it deliberately does not duplicate
 
-## Core pipeline
+- **Content Universe**: durable assets, provenance, lineage, collections, retrieval
+- **my-creators**: storyboard/image-generation contracts and local ComfyUI-family execution
+- **SuperAgents**: capability routing, agent selection, verification, approval semantics
+- **SuperSkills**: curated reusable capability vocabulary
+- **agent-skills**: broad authored skill/agent laboratory
+- **Creator Camp**: canon, IP, rights, release evidence, adaptation lineage
 
-```text
-content JSON
-  -> validate
-  -> normalize
-  -> plan scenes
-  -> resolve assets
-  -> narration / audio
-  -> composition manifest
-  -> FFmpeg render
-  -> QC
-  -> approval package
-  -> publish adapter
-  -> archive + analytics metadata
-```
-
-## Repository map
+## Evolved architecture
 
 ```text
-config/             brand and provider configuration
-content/            example content packages
-docs/               architecture and operator documentation
-schemas/            JSON Schema contracts
-src/icho_reel_eng/  Python engine
-scripts/             command-line helpers
-workflows/n8n/      n8n workflow contracts and importable starters
-tests/               deterministic regression tests
-.github/workflows/  CI
+superSkills
+    │
+superAgents
+    │
+Creator input ──► icho-reel-eng
+                    │
+        ┌───────────┼────────────┐
+        ▼           ▼            ▼
+content-universe  my-creators  creator-camp
+        │           │            │
+        └───────────┼────────────┘
+                    ▼
+             resolved scene pack
+                    │
+             narration + captions
+                    │
+                  FFmpeg
+                    │
+               ffprobe QC
+                    │
+              approval package
+                    │
+        Instagram / Shorts / TikTok
+                    │
+             Content Universe
+          provenance registration
 ```
 
-## Quick start
+## v0.3 compiler flow
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -e '.[dev]'
-icho-reel validate content/examples/builder-commentary.json
-icho-reel plan content/examples/builder-commentary.json --out runs/example-plan.json
+1. Validate a creator content package.
+2. Plan scenes deterministically.
+3. Resolve existing assets from Content Universe first.
+4. Fall back to local filesystem archives.
+5. If no suitable asset exists, emit a my-creators storyboard-generation request.
+6. Build subtitle cues with content/scene provenance.
+7. Build a vertical render manifest.
+8. Route required capabilities through a SuperAgents request envelope.
+9. Render with the local media layer.
+10. Verify dimensions, duration, video/audio streams, and output presence with ffprobe.
+11. Produce an approval package.
+12. Publish only after explicit approval through platform adapters.
+13. Register the final derived artifact back into Content Universe.
+14. For narrative/IP content, attach Creator Camp canon and rights lineage.
+
+## Core modules
+
+```text
+src/icho_reel_eng/
+├── core.py             # validation, planning, render manifest
+├── ecosystem.py        # pinned ecosystem routing and ownership
+├── bridges.py          # my-creators + Content Universe handoffs
+├── asset_resolver.py   # Content Universe + filesystem resolution
+├── compiler.py         # deterministic production-package compiler
+├── contracts.py        # subtitles, approval, SuperAgents, Creator Camp
+├── qc.py               # ffprobe technical QC
+├── publishing.py       # platform-neutral publish contracts
+├── providers.py        # provider capability interfaces
+└── cli.py              # local operator commands
 ```
 
-FFmpeg is optional for validation/planning but required for local rendering.
+## Archive-first asset strategy
 
-```bash
-ffmpeg -version
+The compiler prefers creator-owned history over needless generation:
+
+```text
+Content Universe
+      ↓
+local archive
+      ↓
+existing gameplay / screenshots / generated work
+      ↓
+my-creators generation request
+      ↓
+external paid generation only when intentionally configured
 ```
+
+This makes prior ichoTaKu work active creative memory rather than cold storage.
+
+## Approval-first publishing
+
+Publishing is intentionally fail-closed. The provided `DryRunPublisher` is non-destructive, and the n8n v0.3 workflow ends at an approval gate until real platform credentials and explicit publish adapters are configured.
+
+Supported publish contract targets:
+
+- Instagram
+- YouTube Shorts
+- TikTok
 
 ## Content modes
 
-The initial contract supports:
+The engine is designed around multiple ichoTaKu modes rather than a fixed avatar/B-roll ratio:
 
-- `builder_commentary`
-- `gameplay_insight`
-- `anthology_lore`
-- `voiceover_broll`
-- `music_visual`
+- builder / automation commentary
+- ESO and gameplay insight
+- DigitalDive knowledge clips
+- Heartbreak Alley / Love Is Rubbish / Trashcat anthology
+- music and visual experiments
+- future mixed-media story adaptations
 
-Each content package chooses a `structure_mode`, `brand_profile`, target platforms, script, and asset strategy. The planner converts that into scenes without forcing a universal 30/70 format.
+## Schemas
 
-## Default brand profiles
+- `schemas/content.schema.json`
+- `schemas/run.schema.json`
+- `schemas/approval-package.schema.json`
 
-- `ichotaku_default`
-- `digitaldive`
-- `heartbreak_alley`
-- `eso_gaming`
+## n8n
 
-See `config/brands/` and `docs/BRAND_GUIDE.md`.
+Starter workflows live in `workflows/n8n/`.
 
-## Safety rails
+The evolved `02_compile_review_publish.json` workflow is intentionally review-first. It creates a normalized run, compiles plan/manifests, then returns an approval gate rather than silently publishing.
 
-The v1 engine defaults to `approval` publishing mode. Publishing adapters are deliberately kept outside the render core, and secrets are never stored in content JSON or committed workflow exports.
+## Development
 
-## Current status
+```bash
+python -m pip install -e '.[dev]'
+pytest
+ruff check .
+```
 
-Foundation / MVP vertical-slice architecture. Validation, planning, manifests, local render-command generation, sample content, tests, CI, and n8n integration contracts are included. Provider-specific credential wiring and production social publishing remain opt-in deployment work.
+FFmpeg and ffprobe are expected for real rendering/QC workflows.
 
-See `docs/ROADMAP.md` and `CHANGELOG.md`.
+## Design rule
+
+The Reel Engine is a **compiler, not the universe**.
+
+It consumes curated capabilities and creator memory, produces reproducible media artifacts, and hands durable knowledge back to the systems that own it.

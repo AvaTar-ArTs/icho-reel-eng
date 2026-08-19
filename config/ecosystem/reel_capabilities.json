@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "stages": {
+    "ingest": ["verification", "source-backed-research"],
+    "plan": ["capability-routing", "structured-asset-pipeline"],
+    "resolve_assets": ["asset-provenance", "creative-graph"],
+    "generate_visuals": ["storyboard-generation", "visual-consistency"],
+    "render": ["structured-asset-pipeline", "verification-gates"],
+    "approve": ["approval-policy", "execution-audit"],
+    "publish": ["approval-policy", "execution-audit"],
+    "archive": ["asset-provenance", "asset-lineage", "workflow-provenance"],
+    "story_release": ["canon-workflow", "release-packaging", "rights-records"]
+  },
+  "content_type_overlays": {
+    "anthology_lore": [
+      "canon-workflow",
+      "storyboard-generation",
+      "asset-provenance",
+      "visual-consistency"
+    ],
+    "gameplay_insight": [
+      "asset-provenance",
+      "verification",
+      "structured-asset-pipeline"
+    ],
+    "builder_commentary": [
+      "source-backed-research",
+      "structured-asset-pipeline",
+      "verification"
+    ]
+  }
+}
