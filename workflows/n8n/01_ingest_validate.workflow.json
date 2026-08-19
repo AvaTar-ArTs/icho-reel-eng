@@ -1,0 +1,70 @@
+{
+  "name": "ichoTaKu Reel Engine - 01 Ingest Validate",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "icho-reel-ingest",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-ingest",
+      "name": "Content Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-620, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const crypto = require('crypto');\nconst body = $json.body ?? $json;\nreturn [{ json: { run_id: crypto.randomUUID(), received_at: new Date().toISOString(), content: body } }];"
+      },
+      "id": "assign-run",
+      "name": "Assign Run ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-380, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const content = $json.content;\nif (!content || typeof content !== 'object') throw new Error('Missing JSON content package');\nfor (const key of ['content_id','title','content_type','script','format','branding','publishing']) {\n  if (!(key in content)) throw new Error(`Missing required field: ${key}`);\n}\nreturn [{ json: $json }];"
+      },
+      "id": "cheap-guard",
+      "name": "Cheap Contract Guard",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 0]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { accepted: true, run_id: $json.run_id, content_id: $json.content.content_id, next_stage: 'python_schema_validation' } }}",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "Accepted",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [120, 0]
+    }
+  ],
+  "connections": {
+    "Content Webhook": {
+      "main": [[{"node": "Assign Run ID", "type": "main", "index": 0}]]
+    },
+    "Assign Run ID": {
+      "main": [[{"node": "Cheap Contract Guard", "type": "main", "index": 0}]]
+    },
+    "Cheap Contract Guard": {
+      "main": [[{"node": "Accepted", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "icho_reel_contract": "v1"
+  },
+  "tags": []
+}
