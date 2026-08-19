@@ -5,7 +5,14 @@ from pathlib import Path
 
 import typer
 
-from .core import build_render_manifest, ffmpeg_available, load_json, plan_content, validate_content, write_json
+from .core import (
+    build_render_manifest,
+    ffmpeg_available,
+    load_json,
+    plan_content,
+    validate_content,
+    write_json,
+)
 
 app = typer.Typer(help="ichoTaKu short-form media engine")
 
