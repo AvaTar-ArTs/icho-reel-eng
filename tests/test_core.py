@@ -1,7 +1,11 @@
 from pathlib import Path
 
-from icho_reel_eng.core import build_render_manifest, load_json, plan_content, validate_content
-
+from icho_reel_eng.core import (
+    build_render_manifest,
+    load_json,
+    plan_content,
+    validate_content,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = ROOT / "content" / "examples"
