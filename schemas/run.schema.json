@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avatararts.org/schemas/icho-reel/run.schema.json",
+  "title": "ichoTaKu Reel Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "content_id", "status", "workflow_version", "provider_usage", "assets", "outputs", "errors", "timestamps"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 8},
+    "content_id": {"type": "string", "minLength": 3},
+    "status": {
+      "enum": ["draft", "validated", "planning", "asset_resolution", "media_generation", "rendering", "qc", "ready_for_review", "revision_requested", "approved", "scheduled", "published", "failed", "archived"]
+    },
+    "workflow_version": {"type": "string"},
+    "provider_usage": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+    "assets": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currency": {"type": "string", "default": "USD"},
+        "estimated": {"type": "number", "minimum": 0},
+        "actual": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "outputs": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+    "errors": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+    "timestamps": {"type": "object", "additionalProperties": {"type": ["string", "null"]}}
+  }
+}

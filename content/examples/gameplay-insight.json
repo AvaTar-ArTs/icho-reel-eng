@@ -1,0 +1,56 @@
+{
+  "content_id": "icho-eso-0001",
+  "series": "eso",
+  "title": "ESO Discovery Short",
+  "topic": "gameplay insight",
+  "content_type": "gameplay_insight",
+  "description": "Gameplay-first short with ichoTaKu commentary and minimal overlays.",
+  "script": {
+    "hook": "This is the part of the encounter most people rush past.",
+    "body": [
+      "Watch the positioning before the mechanic fires.",
+      "The useful detail is not the damage. It is the timing window that opens immediately after it."
+    ],
+    "cta": "Save this one for your next run."
+  },
+  "format": {
+    "platform_targets": ["instagram", "youtube_shorts"],
+    "aspect_ratio": "9:16",
+    "target_duration_sec": 30,
+    "structure_mode": "gameplay_insight"
+  },
+  "presentation": {
+    "avatar_mode": "none",
+    "voice_mode": "human",
+    "subtitle_mode": "burned_in",
+    "visual_density": "minimal",
+    "transition_style": "gameplay_respectful"
+  },
+  "branding": {
+    "brand_profile": "eso_gaming",
+    "theme_profile": "eso_guide",
+    "intro_template": null,
+    "outro_template": "icho_eso_cta_v1"
+  },
+  "assets": {
+    "preferred_sources": ["gameplay", "local_archive", "uploaded"],
+    "asset_tags": ["eso", "gameplay", "guide"],
+    "required_assets": ["primary-gameplay-clip"],
+    "optional_assets": ["map-card", "marker-overlay"]
+  },
+  "audio": {
+    "voice_provider": null,
+    "voice_id": null,
+    "music_mode": "none",
+    "ducking": true
+  },
+  "publishing": {
+    "mode": "approval",
+    "schedule_at": null
+  },
+  "metadata": {
+    "hashtags_seed": ["#ichoTaKu", "#ESO", "#ElderScrollsOnline"],
+    "cta": "Save this one for your next run.",
+    "language": "en"
+  }
+}
